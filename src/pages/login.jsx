@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./login.css";
 import { authCheckOnLoginPage } from "../helper/auth";
+import { redirect } from "../constant/router";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -13,18 +14,13 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      alert("Please fill in all fields");
+    if (email === "admin@gmail.com" && password === "123456789") {
+      localStorage.setItem("userLoggedIn", true);
+      redirect("/");
       return;
+    } else {
+      alert("Invalid email or password");
     }
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      alert("Please enter a valid email address");
-      return;
-    }
-    console.log("Email:", email);
-    console.log("Password:", password);
   };
 
   return (
