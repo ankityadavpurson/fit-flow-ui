@@ -7,15 +7,8 @@ import Delete from "../components/icons/delete";
 import AddSubscriptionForm from "../components/add-subscription-form";
 
 const Subscriptions = () => {
-  const [subscriptions, setSubscriptions] = useState([
-    {
-      subscriptionId: 0,
-      subscriptionPlan: "Basic Plan",
-      subscriptionOffer: "10% Off",
-      subscriptionDetails: "Access to gym equipment only",
-    },
-  ]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [subscriptions, setSubscriptions] = useState([]);
 
   const handleDialogOpen = () => {
     setIsDialogOpen(true);
@@ -33,39 +26,48 @@ const Subscriptions = () => {
     <div className="subscriptions-container">
       <Layout>
         <h2>Manage Subscriptions</h2>
-        <button onClick={handleDialogOpen} className="add-member">Add Subscription</button>
-        <table>
-          <thead>
-            <tr>
-              <th>Subscription ID</th>
-              <th>Plan</th>
-              <th>Offer</th>
-              <th>Details</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {subscriptions.map((sub) => (
-              <tr key={sub.subscriptionId}>
-                <td>{sub.subscriptionId}</td>
-                <td>{sub.subscriptionPlan}</td>
-                <td>{sub.subscriptionOffer}</td>
-                <td>{sub.subscriptionDetails}</td>
-                <td className="action">
-                  <button>
-                    <View />
-                  </button>
-                  <button>
-                    <Edit />
-                  </button>
-                  <button onClick={() => handleDelete(sub.subscriptionId)}>
-                    <Delete />
-                  </button>
-                </td>
+        <button onClick={handleDialogOpen} className="add-member">
+          Add Subscription
+        </button>
+        {subscriptions.length !== 0 && (
+          <table>
+            <thead>
+              <tr>
+                <th>Subscription ID</th>
+                <th>Plan</th>
+                <th>Offer</th>
+                <th>Details</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {subscriptions.map((sub) => (
+                <tr key={sub.subscriptionId}>
+                  <td>{sub.subscriptionId}</td>
+                  <td>{sub.subscriptionPlan}</td>
+                  <td>{sub.subscriptionOffer}</td>
+                  <td>{sub.subscriptionDetails}</td>
+                  <td className="action">
+                    <button>
+                      <View />
+                    </button>
+                    <button>
+                      <Edit />
+                    </button>
+                    <button onClick={() => handleDelete(sub.subscriptionId)}>
+                      <Delete />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+        {subscriptions.length === 0 && (
+          <div className="no-data">
+            <p>No subscriptions found. Add a subscription to get started.</p>
+          </div>
+        )}
       </Layout>
 
       {isDialogOpen && (
