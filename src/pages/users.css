@@ -1,0 +1,44 @@
+.users-container {
+  text-align: center;
+  height: 100vh;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background: #ff5722;
+  color: white;
+}
+
+tr:hover {
+  background: #9d9d9d23;
+}
+
+.action button {
+  background: #ff5722;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.action button:hover {
+  background: #ff5722c7;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
