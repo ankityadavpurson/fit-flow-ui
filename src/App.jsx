@@ -1,10 +1,12 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
 
 import pathToScreenMap from "./constant/router";
-import Users from "./pages/users";
+import Loader from "./components/loader";
 
 const Login = lazy(() => import("./pages/login"));
 const Home = lazy(() => import("./pages/home"));
+const Users = lazy(() => import("./pages/users"));
+const Subscriptions = lazy(() => import("./pages/subscriptions"));
 
 const App = () => {
   const [screen, setScreen] = useState("");
@@ -13,7 +15,7 @@ const App = () => {
     setScreen(pathToScreenMap[window.location.pathname] || "not-found");
   }, []);
 
-  const renderScreen = () => {
+  const authScreens = () => {
     switch (screen) {
       case "not-found":
         return <div>404 Not Found</div>;
@@ -23,22 +25,14 @@ const App = () => {
         return <Home />;
       case "users":
         return <Users />;
-      // case "payments":
-      //   return <Payments />;
-      // case "subscriptions":
-      //   return <Subscriptions />;
-      // case "logout":
-      //   return <Logout />;
+      case "subscriptions":
+        return <Subscriptions />;
       default:
         return null;
     }
   };
 
-  return (
-    <div>
-      <Suspense fallback={<div>Loading...</div>}>{renderScreen()}</Suspense>
-    </div>
-  );
+  return <Suspense fallback={<Loader />}>{authScreens()}</Suspense>;
 };
 
 export default App;

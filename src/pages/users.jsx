@@ -1,3 +1,6 @@
+import Edit from "../components/icons/edit";
+import View from "../components/icons/view";
+import Delete from "../components/icons/delete";
 import Layout from "../components/layout";
 import "./users.css";
 
@@ -109,25 +112,13 @@ const Users = () => {
                 <td>${user.amount}</td>
                 <td className="action">
                   <button>
-                    <img
-                      src="https://www.svgrepo.com/show/500736/view.svg"
-                      height={20}
-                      width={20}
-                    />
+                    <View />
                   </button>
                   <button>
-                    <img
-                      src="https://www.svgrepo.com/show/522525/edit-2.svg"
-                      height={20}
-                      width={20}
-                    />
+                    <Edit />
                   </button>
                   <button>
-                    <img
-                      src="https://www.svgrepo.com/show/500535/delete.svg"
-                      height={20}
-                      width={20}
-                    />
+                    <Delete />
                   </button>
                 </td>
               </tr>

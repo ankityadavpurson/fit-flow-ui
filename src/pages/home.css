@@ -11,17 +11,16 @@
 }
 
 .kpi-card {
-  background: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid #b6b6b657;
+  box-shadow: 0 0px 8px rgba(128, 128, 128, 0.2);
   width: 200px;
   text-align: center;
 }
 
 .kpi-card h3 {
   margin-bottom: 10px;
-  color: #333;
 }
 
 .kpi-card p {
