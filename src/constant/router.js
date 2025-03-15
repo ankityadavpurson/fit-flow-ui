@@ -1,6 +1,6 @@
 const pathToScreenMap = {
   "/login": "login",
-  "/users": "users",
+  "/members": "members",
   "/payments": "payments",
   "/subscriptions": "subscriptions",
   "/": "home",

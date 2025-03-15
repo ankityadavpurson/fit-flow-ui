@@ -2,7 +2,7 @@ import Edit from "../components/icons/edit";
 import View from "../components/icons/view";
 import Delete from "../components/icons/delete";
 import Layout from "../components/layout";
-import "./users.css";
+import "./members.css";
 import AddMemberForm from "../components/add-member-form";
 import { useState } from "react";
 
@@ -81,7 +81,7 @@ const users = [
   },
 ];
 
-const Users = () => {
+const Members = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleDialogOpen = () => {
@@ -93,7 +93,7 @@ const Users = () => {
   };
 
   return (
-    <div className="users-container">
+    <div className="members-container">
       <Layout>
         <h2>Gym Members</h2>
         <button className="add-member" onClick={handleDialogOpen}>
@@ -157,4 +157,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Members;

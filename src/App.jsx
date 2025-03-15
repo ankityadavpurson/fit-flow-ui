@@ -5,7 +5,7 @@ import Loader from "./components/loader";
 
 const Login = lazy(() => import("./pages/login"));
 const Home = lazy(() => import("./pages/home"));
-const Users = lazy(() => import("./pages/users"));
+const Members = lazy(() => import("./pages/members"));
 const Subscriptions = lazy(() => import("./pages/subscriptions"));
 
 const App = () => {
@@ -23,8 +23,8 @@ const App = () => {
         return <Login />;
       case "home":
         return <Home />;
-      case "users":
-        return <Users />;
+      case "members":
+        return <Members />;
       case "subscriptions":
         return <Subscriptions />;
       default:
