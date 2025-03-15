@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { authCheckOnLoginPage } from "../../helper/auth";
-import { redirect } from "../../constant/router";
+import { redirect, setPageTitle } from "../../helper/utils";
 import "./login.css";
 
 const LoginPage = () => {
@@ -9,6 +9,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     authCheckOnLoginPage();
+    setPageTitle("Admin Login");
   }, []);
 
   const handleSubmit = (e) => {

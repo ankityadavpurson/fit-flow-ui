@@ -1,4 +1,4 @@
-import { redirect } from "../constant/router";
+import { redirect } from "./utils";
 
 export const authCheckOnLoginPage = () => {
   const userLoggedIn = localStorage.getItem("userLoggedIn");

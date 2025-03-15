@@ -1,10 +1,10 @@
-import Layout from "../../components/layout";
+import Layout from "../../components/layout/layout";
 import "./home.css";
 
 const Home = () => {
   return (
     <div className="home-container">
-      <Layout>
+      <Layout title="Dashboard">
         <h1>Dashboard</h1>
         <div className="kpi-container">
           <div className="kpi-card">

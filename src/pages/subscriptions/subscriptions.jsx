@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Layout from "../../components/layout";
+import Layout from "../../components/layout/layout";
 import View from "../../components/icons/view";
 import Edit from "../../components/icons/edit";
 import Delete from "../../components/icons/delete";
-import AddSubscriptionForm from "../../components/add-subscription-form";
+import AddSubscriptionForm from "../../components/add-subscription-form/add-subscription-form";
 import "./subscriptions.css";
 
 const Subscriptions = () => {
@@ -24,7 +24,7 @@ const Subscriptions = () => {
 
   return (
     <div className="subscriptions-container">
-      <Layout>
+      <Layout title="Subscriptions">
         <h2>Manage Subscriptions</h2>
         <button onClick={handleDialogOpen} className="add-member">
           Add Subscription

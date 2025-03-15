@@ -1,4 +1,4 @@
-import Dumbbell from "./icons/dumbbell";
+import Dumbbell from "../icons/dumbbell";
 
 const Loader = () => {
   return (

@@ -1,12 +1,12 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 
 import pathToScreenMap from "./constant/router";
-import Loader from "./components/loader";
+import Loader from "./components/loader/loader";
 
-const Login = lazy(() => import("./pages/login"));
-const Home = lazy(() => import("./pages/home"));
-const Members = lazy(() => import("./pages/members"));
-const Subscriptions = lazy(() => import("./pages/subscriptions"));
+const Login = lazy(() => import("./pages/login/login"));
+const Home = lazy(() => import("./pages/home/home"));
+const Members = lazy(() => import("./pages/members/members"));
+const Subscriptions = lazy(() => import("./pages/subscriptions/subscriptions"));
 
 const App = () => {
   const [screen, setScreen] = useState("");

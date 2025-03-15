@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Edit from "../../components/icons/edit";
 import View from "../../components/icons/view";
 import Delete from "../../components/icons/delete";
-import Layout from "../../components/layout";
-import AddMemberForm from "../../components/add-member-form";
+import Layout from "../../components/layout/layout";
+import AddMemberForm from "../../components/add-member-form/add-member-form";
 import "./members.css";
 
 const Members = () => {
@@ -26,7 +26,7 @@ const Members = () => {
 
   return (
     <div className="members-container">
-      <Layout>
+      <Layout title="Members">
         <h2>Gym Members</h2>
         <button className="add-member" onClick={handleDialogOpen}>
           Add Member
