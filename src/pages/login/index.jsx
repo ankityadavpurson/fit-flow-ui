@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { authCheckOnLoginPage } from "../../helper/auth";
+import { redirect } from "../../constant/router";
 import "./login.css";
-import { authCheckOnLoginPage } from "../helper/auth";
-import { redirect } from "../constant/router";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");

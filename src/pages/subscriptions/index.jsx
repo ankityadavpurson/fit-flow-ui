@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import Layout from "../../components/layout";
+import View from "../../components/icons/view";
+import Edit from "../../components/icons/edit";
+import Delete from "../../components/icons/delete";
+import AddSubscriptionForm from "../../components/add-subscription-form";
 import "./subscriptions.css";
-import Layout from "../components/layout";
-import View from "../components/icons/view";
-import Edit from "../components/icons/edit";
-import Delete from "../components/icons/delete";
-import AddSubscriptionForm from "../components/add-subscription-form";
 
 const Subscriptions = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);

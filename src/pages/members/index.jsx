@@ -1,10 +1,10 @@
-import Edit from "../components/icons/edit";
-import View from "../components/icons/view";
-import Delete from "../components/icons/delete";
-import Layout from "../components/layout";
-import "./members.css";
-import AddMemberForm from "../components/add-member-form";
 import { useEffect, useState } from "react";
+import Edit from "../../components/icons/edit";
+import View from "../../components/icons/view";
+import Delete from "../../components/icons/delete";
+import Layout from "../../components/layout";
+import AddMemberForm from "../../components/add-member-form";
+import "./members.css";
 
 const Members = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
