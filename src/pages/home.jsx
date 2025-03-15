@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <Layout>
-        <h1>Admin Dashboard</h1>
+        <h1>Dashboard</h1>
         <div className="kpi-container">
           <div className="kpi-card">
             <h3>Total Members</h3>
