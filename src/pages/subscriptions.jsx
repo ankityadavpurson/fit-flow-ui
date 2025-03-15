@@ -4,6 +4,7 @@ import Layout from "../components/layout";
 import View from "../components/icons/view";
 import Edit from "../components/icons/edit";
 import Delete from "../components/icons/delete";
+import AddSubscriptionForm from "../components/add-subscription-form";
 
 const Subscriptions = () => {
   const [subscriptions, setSubscriptions] = useState([
@@ -14,28 +15,14 @@ const Subscriptions = () => {
       subscriptionDetails: "Access to gym equipment only",
     },
   ]);
-  const [newSub, setNewSub] = useState({
-    subscriptionPlan: "",
-    subscriptionOffer: "",
-    subscriptionDetails: "",
-  });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleAdd = () => {
-    if (
-      newSub.subscriptionPlan &&
-      newSub.subscriptionOffer &&
-      newSub.subscriptionDetails
-    ) {
-      setSubscriptions([
-        ...subscriptions,
-        { subscriptionId: Date.now(), ...newSub },
-      ]);
-      setNewSub({
-        subscriptionPlan: "",
-        subscriptionOffer: "",
-        subscriptionDetails: "",
-      });
-    }
+  const handleDialogOpen = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
   };
 
   const handleDelete = (id) => {
@@ -46,33 +33,7 @@ const Subscriptions = () => {
     <div className="subscriptions-container">
       <Layout>
         <h2>Manage Subscriptions</h2>
-        <div className="subscription-form">
-          <input
-            type="text"
-            placeholder="Subscription Plan"
-            value={newSub.subscriptionPlan}
-            onChange={(e) =>
-              setNewSub({ ...newSub, subscriptionPlan: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Subscription Offer"
-            value={newSub.subscriptionOffer}
-            onChange={(e) =>
-              setNewSub({ ...newSub, subscriptionOffer: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Subscription Details"
-            value={newSub.subscriptionDetails}
-            onChange={(e) =>
-              setNewSub({ ...newSub, subscriptionDetails: e.target.value })
-            }
-          />
-          <button onClick={handleAdd}>Add Subscription</button>
-        </div>
+        <button onClick={handleDialogOpen} className="add-member">Add Subscription</button>
         <table>
           <thead>
             <tr>
@@ -106,6 +67,19 @@ const Subscriptions = () => {
           </tbody>
         </table>
       </Layout>
+
+      {isDialogOpen && (
+        <div className="dialog-container">
+          <dialog open className="dialog">
+            <div className="dialog-content">
+              <button className="close-dialog" onClick={handleDialogClose}>
+                X
+              </button>
+              <AddSubscriptionForm />
+            </div>
+          </dialog>
+        </div>
+      )}
     </div>
   );
 };

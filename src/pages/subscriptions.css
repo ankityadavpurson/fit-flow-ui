@@ -3,33 +3,20 @@
   height: 100vh;
 }
 
-.subscription-form {
-  margin-block: 20px;
-}
-
-.subscription-form input {
-  padding: 10px;
-  margin: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.subscription-form button {
+.add-member {
   padding: 10px 15px;
   background: #ff5722;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-
-.subscription-form button:hover {
-  background: #e64a19;
+  margin-top: 20px;
 }
 
 table {
   border-collapse: collapse;
-  margin: 20px;
+  margin: auto;
+  margin-top: 20px;
 }
 
 th,
@@ -42,16 +29,4 @@ td {
 th {
   background: #ff5722;
   color: white;
-}
-
-button {
-  padding: 5px 10px;
-  color: white;
-  background: #ff5722;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #e64a19;
 }

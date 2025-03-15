@@ -5,7 +5,8 @@
 
 table {
   border-collapse: collapse;
-  margin: 20px;
+  margin: auto;
+  margin-top: 20px;
 }
 
 th,
@@ -22,4 +23,14 @@ th {
 
 tr:hover {
   background: #9d9d9d23;
+}
+
+.add-member {
+  padding: 10px 15px;
+  background: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
 }

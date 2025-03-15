@@ -3,6 +3,8 @@ import View from "../components/icons/view";
 import Delete from "../components/icons/delete";
 import Layout from "../components/layout";
 import "./users.css";
+import AddMemberForm from "../components/add-member-form";
+import { useState } from "react";
 
 const users = [
   {
@@ -80,10 +82,23 @@ const users = [
 ];
 
 const Users = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleDialogOpen = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+  };
+
   return (
     <div className="users-container">
       <Layout>
         <h2>Gym Members</h2>
+        <button className="add-member" onClick={handleDialogOpen}>
+          Add Member
+        </button>
         <table>
           <thead>
             <tr>
@@ -126,6 +141,18 @@ const Users = () => {
           </tbody>
         </table>
       </Layout>
+      {isDialogOpen && (
+        <div className="dialog-container">
+          <dialog open className="dialog">
+            <div className="dialog-content">
+              <button className="close-dialog" onClick={handleDialogClose}>
+                X
+              </button>
+              <AddMemberForm />
+            </div>
+          </dialog>
+        </div>
+      )}
     </div>
   );
 };
