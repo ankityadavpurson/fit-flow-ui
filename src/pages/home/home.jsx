@@ -13,7 +13,7 @@ const Home = () => {
           </div>
           <div className="kpi-card">
             <h3>Payments Received</h3>
-            <p>$12,500</p>
+            <p>₹12,500</p>
           </div>
         </div>
       </Layout>

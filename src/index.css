@@ -80,7 +80,7 @@ button:hover {
   cursor: pointer;
 }
 
-input {
+input, select {
   padding: 10px;
   margin: 5px;
   border: 1px solid #ccc;

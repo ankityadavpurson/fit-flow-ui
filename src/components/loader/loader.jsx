@@ -1,4 +1,5 @@
 import Dumbbell from "../icons/dumbbell";
+import "./loader.css";
 
 const Loader = () => {
   return (
