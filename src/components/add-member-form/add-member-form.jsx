@@ -13,7 +13,7 @@ const typesOfSubscriptions = [
   {
     subscriptionId: 0,
     subscriptionDiscount: 0,
-    price: 0,
+    subscriptionPrice: 0,
     subscriptionPlan: "Select Subscription Plan",
     subscriptionOffer: "",
     subscriptionDetails: "",
@@ -21,7 +21,7 @@ const typesOfSubscriptions = [
   {
     subscriptionId: 100,
     subscriptionDiscount: 5,
-    price: 1999,
+    subscriptionPrice: 1999,
     subscriptionPlan: "1-Month Plan for just ₹1,999!",
     subscriptionOffer: "Get a 5% discount on your Subscription Plan!",
     subscriptionDetails: "Enjoy a 21-day pause on your subscription",
@@ -29,7 +29,7 @@ const typesOfSubscriptions = [
   {
     subscriptionId: 200,
     subscriptionDiscount: 0,
-    price: 2999,
+    subscriptionPrice: 2999,
     subscriptionPlan: "2-Month Plan for just ₹2,999!",
     subscriptionOffer: "No discount on your Subscription Plan!",
     subscriptionDetails: "Enjoy a 21-day pause on your subscription",
@@ -37,7 +37,7 @@ const typesOfSubscriptions = [
   {
     subscriptionId: 300,
     subscriptionDiscount: 10,
-    price: 4999,
+    subscriptionPrice: 4999,
     subscriptionPlan: "3-Month Plan for just ₹4,999!",
     subscriptionOffer: "Get a 10% discount on your Subscription Plan!",
     subscriptionDetails: "Enjoy a 21-day pause on your subscription",
@@ -45,7 +45,7 @@ const typesOfSubscriptions = [
   {
     subscriptionId: 400,
     subscriptionDiscount: 15,
-    price: 7999,
+    subscriptionPrice: 7999,
     subscriptionPlan: "6-Month Plan for just ₹7,999!",
     subscriptionOffer: "Get a 15% discount on your Subscription Plan!",
     subscriptionDetails: "Enjoy a 21-day pause on your subscription",
@@ -64,8 +64,9 @@ const AddMemberForm = ({ user }) => {
       );
 
       const amount =
-        subscription.price -
-        subscription.price * (subscription.subscriptionDiscount / 100);
+        subscription.subscriptionPrice -
+        subscription.subscriptionPrice *
+          (subscription.subscriptionDiscount / 100);
       const _formData = { ...formData, amount, [name]: value };
       setFormData(_formData);
       return;
@@ -84,54 +85,66 @@ const AddMemberForm = ({ user }) => {
     <div>
       <form className="add-user-form" onSubmit={handleFormSubmit}>
         <h3>{user ? "Update Member Details" : "Add New Member"}</h3>
-        <input
-          required
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        <input
-          required
-          type="text"
-          name="phoneNo"
-          placeholder="Phone No"
-          value={formData.phoneNo}
-          onChange={handleChange}
-        />
-        <input
-          required
-          type="email"
-          name="emailId"
-          placeholder="Email ID"
-          value={formData.emailId}
-          onChange={handleChange}
-        />
-        <input
-          required
-          type="date"
-          name="joiningDate"
-          placeholder="Joining Date"
-          value={formData.joiningDate.split("T")[0]}
-          onChange={handleChange}
-        />
-        <select
-          required
-          name="subscriptionId"
-          value={formData.subscriptionId}
-          onChange={handleChange}
-        >
-          {typesOfSubscriptions.map((sub) => (
-            <option key={sub.subscriptionId} value={sub.subscriptionId}>
-              {`${sub.subscriptionPlan}${
-                sub.subscriptionDiscount !== 0
-                  ? ` - ₹${sub.subscriptionDiscount} % discount`
-                  : ""
-              }`}
-            </option>
-          ))}
-        </select>
+
+        <div className="input-group">
+          <label htmlFor="name">Name</label>
+          <input
+            required
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+
+          <label htmlFor="phoneNo">Phone No</label>
+          <input
+            required
+            type="text"
+            name="phoneNo"
+            placeholder="Phone No"
+            value={formData.phoneNo}
+            onChange={handleChange}
+          />
+
+          <label htmlFor="emailId">Email ID</label>
+          <input
+            required
+            type="email"
+            name="emailId"
+            placeholder="Email ID"
+            value={formData.emailId}
+            onChange={handleChange}
+          />
+
+          <label htmlFor="joiningDate">Joining Date</label>
+          <input
+            required
+            type="date"
+            name="joiningDate"
+            placeholder="Joining Date"
+            value={formData.joiningDate.split("T")[0]}
+            onChange={handleChange}
+          />
+
+          <label htmlFor="subscriptionId">Subscription Plan</label>
+          <select
+            required
+            name="subscriptionId"
+            value={formData.subscriptionId}
+            onChange={handleChange}
+          >
+            {typesOfSubscriptions.map((sub) => (
+              <option key={sub.subscriptionId} value={sub.subscriptionId}>
+                {`${sub.subscriptionPlan}${
+                  sub.subscriptionDiscount !== 0
+                    ? ` - ₹${sub.subscriptionDiscount} % discount`
+                    : ""
+                }`}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {formData.amount > 0 ? (
           <table className="amount-details">
