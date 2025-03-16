@@ -87,10 +87,11 @@ export const saveSubscription = async (subscriptionData) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(subscriptionData),
     });
-    return await response.json();
+    const status = await response.status();
+    return status === 200;
   } catch (error) {
     console.error(error);
-    return null;
+    return false;
   }
 };
 

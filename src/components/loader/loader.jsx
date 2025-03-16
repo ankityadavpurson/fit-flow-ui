@@ -1,4 +1,4 @@
-import Dumbbell from "../icons/dumbbell";
+import LoadingDumbbell from "./loading-dumbbell";
 import "./loader.css";
 
 const Loader = () => {
@@ -13,9 +13,7 @@ const Loader = () => {
         flexDirection: "column",
       }}
     >
-      <div className="loader">
-        <Dumbbell />
-      </div>
+      <LoadingDumbbell />
       <div>Loading ...</div>
     </div>
   );
