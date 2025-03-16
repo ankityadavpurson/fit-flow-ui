@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout/layout";
 import View from "../../components/icons/view";
 import Edit from "../../components/icons/edit";
 import Delete from "../../components/icons/delete";
 import AddSubscriptionForm from "../../components/add-subscription-form/add-subscription-form";
 import "./subscriptions.css";
+import { deleteSubscription, fetchSubscriptions } from "../../helper/apis";
+import Close from "../../components/icons/close";
 
 const Subscriptions = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [subscriptions, setSubscriptions] = useState([]);
+  const [subscription, setSubscription] = useState(null);
+  const [view, setView] = useState(false);
+  const [deleteSub, setDeleteSub] = useState(null);
+
+  const getSubscriptions = async () => {
+    const _subscriptions = await fetchSubscriptions();
+    setSubscriptions(_subscriptions);
+  };
+
+  useEffect(() => {
+    getSubscriptions();
+  }, []);
 
   const handleDialogOpen = () => {
     setIsDialogOpen(true);
@@ -16,10 +30,18 @@ const Subscriptions = () => {
 
   const handleDialogClose = () => {
     setIsDialogOpen(false);
+    setSubscription(null);
+    setDeleteSub(null);
   };
 
-  const handleDelete = (id) => {
-    setSubscriptions(subscriptions.filter((sub) => sub.subscriptionId !== id));
+  const handleDeleteDialog = (sub) => {
+    setDeleteSub(sub);
+    setIsDialogOpen(true);
+  };
+
+  const handleDelete = async (sub) => {
+    const deleted = await deleteSubscription(sub.subscriptionId);
+    if (deleted) getSubscriptions();
   };
 
   return (
@@ -48,13 +70,25 @@ const Subscriptions = () => {
                   <td>{sub.subscriptionOffer}</td>
                   <td>{sub.subscriptionDetails}</td>
                   <td className="action">
-                    <button>
+                    <button
+                      onClick={() => {
+                        setView(true);
+                        setSubscription(sub);
+                        setIsDialogOpen(true);
+                      }}
+                    >
                       <View />
                     </button>
-                    <button>
+                    <button
+                      onClick={() => {
+                        setView(false);
+                        setSubscription(sub);
+                        setIsDialogOpen(true);
+                      }}
+                    >
                       <Edit />
                     </button>
-                    <button onClick={() => handleDelete(sub.subscriptionId)}>
+                    <button onClick={() => handleDeleteDialog(sub)}>
                       <Delete />
                     </button>
                   </td>
@@ -75,9 +109,43 @@ const Subscriptions = () => {
           <dialog open className="dialog">
             <div className="dialog-content">
               <button className="close-dialog" onClick={handleDialogClose}>
-                X
+                <Close />
               </button>
-              <AddSubscriptionForm />
+              {deleteSub ? (
+                <div className="delete-dialog">
+                  <h3 className="title">Delete Subscription</h3>
+                  <p>Are you sure you want to delete this subscription?</p>
+                  <ViewSubscription subscription={deleteSub} />
+                  <div className="delete-button-group">
+                    <button
+                      onClick={() => {
+                        handleDelete(deleteSub);
+                        handleDialogClose();
+                      }}
+                      className="delete-button"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      onClick={handleDialogClose}
+                      className="cancel-button"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {view && !deleteSub ? (
+                    <ViewSubscription subscription={subscription} />
+                  ) : (
+                    <AddSubscriptionForm
+                      subscription={subscription}
+                      onSubmit={getSubscriptions}
+                    />
+                  )}
+                </>
+              )}
             </div>
           </dialog>
         </div>
@@ -87,3 +155,39 @@ const Subscriptions = () => {
 };
 
 export default Subscriptions;
+
+const ViewSubscription = ({ subscription }) => {
+  return (
+    <div className="subscription-card">
+      <h3 className="title">Subscription Details</h3>
+      <table className="subscription-details-table">
+        <tbody>
+          <tr>
+            <td>ID - </td>
+            <td>{subscription.subscriptionId}</td>
+          </tr>
+          <tr>
+            <td>Plan - </td>
+            <td>{subscription.subscriptionPlan}</td>
+          </tr>
+          <tr>
+            <td>Price - </td>
+            <td>{subscription.subscriptionPrice}</td>
+          </tr>
+          <tr>
+            <td>Discount - </td>
+            <td>{subscription.subscriptionDiscount}</td>
+          </tr>
+          <tr>
+            <td>Offer - </td>
+            <td>{subscription.subscriptionOffer}</td>
+          </tr>
+          <tr>
+            <td>Details - </td>
+            <td>{subscription.subscriptionDetails}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};

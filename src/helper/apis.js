@@ -87,8 +87,7 @@ export const saveSubscription = async (subscriptionData) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(subscriptionData),
     });
-    const status = await response.status();
-    return status === 200;
+    return response.status === 200;
   } catch (error) {
     console.error(error);
     return false;
@@ -102,10 +101,10 @@ export const updateSubscription = async (subscriptionData) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(subscriptionData),
     });
-    return await response.json();
+    return response.status === 200;
   } catch (error) {
     console.error(error);
-    return null;
+    return false;
   }
 };
 
@@ -114,10 +113,10 @@ export const deleteSubscription = async (id) => {
     const response = await fetch(`${API_BASE_URL}/deleteSubscription/${id}`, {
       method: "DELETE",
     });
-    return await response.json();
+    return response.status === 200;
   } catch (error) {
     console.error(error);
-    return null;
+    return false;
   }
 };
 

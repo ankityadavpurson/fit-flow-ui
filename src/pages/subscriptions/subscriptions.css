@@ -15,8 +15,7 @@
 
 table {
   border-collapse: collapse;
-  margin: auto;
-  margin-top: 20px;
+  margin: 20px;
 }
 
 th,
@@ -29,4 +28,32 @@ td {
 th {
   background: #ff5722;
   color: white;
+}
+
+.subscription-card {
+  min-width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.subscription-details-table {
+  width: 100%;
+  font-size: 20px;
+}
+
+.subscription-details-table td {
+  padding: 5px;
+  border: none;
+}
+
+.subscription-details-table tr > td:first-child {
+  font-weight: bold;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }

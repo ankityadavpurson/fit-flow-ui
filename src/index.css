@@ -74,10 +74,13 @@ button:hover {
   top: 0;
   right: 0;
   margin: 10px;
-  padding: 10px;
   border: none;
   background: #222222;
   cursor: pointer;
+}
+
+.close-dialog:hover {
+  background: #222222;
 }
 
 input,
@@ -122,4 +125,23 @@ select {
   color: #ff6262;
   width: 100%;
   text-align: left;
+}
+
+.delete-dialog {
+  padding: 20px;
+}
+
+.delete-button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.delete-button,
+.cancel-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
