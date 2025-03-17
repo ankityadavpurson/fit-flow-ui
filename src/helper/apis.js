@@ -100,6 +100,16 @@ export const deleteSubscription = async (id) => {
   }
 };
 
+export const fetchTotalAmount = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/totalAmount`);
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+};
+
 export const fetchUser = async (phoneNo) => {
   try {
     const response = await fetch(`${API_BASE_URL}/getUser/${phoneNo}`);
@@ -127,16 +137,6 @@ export const fetchUserSubscription = async (phoneNo) => {
   } catch (error) {
     console.error(error);
     return null;
-  }
-};
-
-export const fetchTotalAmount = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/totalAmount`);
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    return "0";
   }
 };
 

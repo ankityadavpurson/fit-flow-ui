@@ -13,10 +13,22 @@
 .kpi-card {
   padding: 20px;
   border-radius: 8px;
-  border: 2px solid #b6b6b657;
+  border: 1px solid #b6b6b657;
   box-shadow: 0 0px 8px rgba(128, 128, 128, 0.2);
   width: 200px;
   text-align: center;
+  text-decoration: none;
+  color: white;
+}
+
+.kpi-card:hover {
+  border: 2px solid #b6b6b657;
+  padding: 19px;
+}
+
+.kpi-card:active {
+  border: 3px solid #b6b6b657;
+  padding: 20px;
 }
 
 .kpi-card h3 {
@@ -27,4 +39,8 @@
   font-size: 24px;
   font-weight: bold;
   color: #ff5722;
+}
+
+.kpi-card .loader {
+  padding-top: 40px;
 }
