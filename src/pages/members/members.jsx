@@ -7,6 +7,7 @@ import AddMemberForm from "../../components/add-member-form/add-member-form";
 import { deleteUser, fetchUsers } from "../../helper/apis";
 import "./members.css";
 import Loader from "../../components/loader/loader";
+import { maskEmailId, maskPhoneNo } from "../../helper/utils";
 
 const Members = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -71,13 +72,8 @@ const Members = () => {
               {users.map((user, index) => (
                 <tr key={index}>
                   <td>{user.name}</td>
-                  <td>{user.phoneNo.replace(/.(?=.{4})/g, "*")}</td>
-                  {/* <td>
-                    {user.emailId.replace(
-                      /(.{2})(.*)(?=@)/,
-                      (_, a, b) => a + b.replace(/./g, "*")
-                    )}
-                  </td> */}
+                  <td>{maskPhoneNo(user.phoneNo)}</td>
+                  {/* <td>{maskEmailId(user.emailId)}</td> */}
                   <td>{user.subscriptionId}</td>
                   <td>{new Date(user.joiningDate).toLocaleDateString()}</td>
                   {/* <td>₹{user.amount}</td> */}
@@ -179,11 +175,11 @@ const ViewMember = ({ member }) => {
           </tr>
           <tr>
             <td>Phone No - </td>
-            <td>{member?.phoneNo}</td>
+            <td>{maskPhoneNo(member?.phoneNo)}</td>
           </tr>
           <tr>
             <td>Email - </td>
-            <td>{member?.emailId}</td>
+            <td>{maskEmailId(member?.emailId)}</td>
           </tr>
           <tr>
             <td>Joining Date - </td>
