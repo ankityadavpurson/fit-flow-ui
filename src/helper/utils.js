@@ -1,5 +1,5 @@
 export const setPageTitle = (title) => {
-  document.title = title || "Fil Flow";
+  document.title = title || "Fit Flow";
 };
 
 export const redirect = (path) => {

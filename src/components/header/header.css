@@ -6,15 +6,31 @@
   background: #343434;
   color: white;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 20px;
+}
+
+.header-title span, a {
+  text-decoration-line: none;
+  color: white;
 }
 
 .header h1 {
   margin: 0;
+  text-align: left;
+  text-decoration-line: none;
 }
 
 nav ul {
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
   gap: 15px;
   margin: 0;
   padding: 0;

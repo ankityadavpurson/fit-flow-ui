@@ -9,7 +9,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     authCheckOnLoginPage();
-    setPageTitle("Admin Login");
+    setPageTitle("Fit Flow - Admin Login");
   }, []);
 
   const handleSubmit = (e) => {
@@ -27,7 +27,7 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2>Admin Login</h2>
+        <h2>Fit Flow - Admin Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label>Email</label>

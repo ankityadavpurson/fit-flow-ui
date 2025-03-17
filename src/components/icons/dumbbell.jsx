@@ -1,5 +1,3 @@
-import React from "react";
-
 const Dumbbell = () => {
   return (
     <img

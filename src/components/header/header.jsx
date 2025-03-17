@@ -1,15 +1,16 @@
-import React from "react";
+import Dumbbell from "../icons/dumbbell";
 import "./header.css";
 
 const Header = () => {
   return (
     <header className="header">
-      <h1>Fit Flow</h1>
+      <a href="/">
+        <h1 className="header-title">
+          <span>Fit Flow</span> <Dumbbell />
+        </h1>
+      </a>
       <nav>
         <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
           <li>
             <a href="/members">Members</a>
           </li>
