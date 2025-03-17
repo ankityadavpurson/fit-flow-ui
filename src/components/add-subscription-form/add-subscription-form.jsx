@@ -29,7 +29,6 @@ const AddSubscriptionForm = ({ subscription, onSubmit }) => {
 
     if (subscription) {
       const updatedSub = await updateSubscription(newSub);
-      console.log("🚀 ~ handleAdd ~ updatedSub:", updatedSub);
       if (!updatedSub) {
         setError("Error updating subscription");
         setLoading(false);
@@ -110,6 +109,8 @@ const AddSubscriptionForm = ({ subscription, onSubmit }) => {
                 <label htmlFor="subscriptionDiscount">Discount</label>
                 <input
                   required
+                  min={0}
+                  max={100}
                   type="number"
                   id="subscriptionDiscount"
                   name="subscriptionDiscount"

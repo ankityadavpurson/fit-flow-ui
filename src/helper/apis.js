@@ -10,16 +10,6 @@ export const fetchUsers = async () => {
   }
 };
 
-export const fetchUser = async (phoneNo) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/getUser/${phoneNo}`);
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
-
 export const saveUser = async (userData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/saveUser`, {
@@ -27,10 +17,10 @@ export const saveUser = async (userData) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
     });
-    return await response.json();
+    return response.status === 200;
   } catch (error) {
     console.error(error);
-    return null;
+    return false;
   }
 };
 
@@ -41,10 +31,10 @@ export const updateUser = async (phoneNo, userData) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
     });
-    return await response.json();
+    return response.status === 200;
   } catch (error) {
     console.error(error);
-    return null;
+    return false;
   }
 };
 
@@ -53,10 +43,10 @@ export const deleteUser = async (phoneNo) => {
     const response = await fetch(`${API_BASE_URL}/deleteUser/${phoneNo}`, {
       method: "DELETE",
     });
-    return await response.json();
+    return response.status === 200;
   } catch (error) {
     console.error(error);
-    return null;
+    return false;
   }
 };
 
@@ -67,16 +57,6 @@ export const fetchSubscriptions = async () => {
   } catch (error) {
     console.error(error);
     return [];
-  }
-};
-
-export const fetchSubscriptionById = async (id) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/getSubscription/${id}`);
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    return null;
   }
 };
 
@@ -117,6 +97,26 @@ export const deleteSubscription = async (id) => {
   } catch (error) {
     console.error(error);
     return false;
+  }
+};
+
+export const fetchUser = async (phoneNo) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/getUser/${phoneNo}`);
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const fetchSubscriptionById = async (id) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/getSubscription/${id}`);
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 };
 

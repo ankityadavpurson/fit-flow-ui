@@ -69,28 +69,30 @@ const Subscriptions = () => {
                   <td>{sub.subscriptionPlan}</td>
                   <td>{sub.subscriptionOffer}</td>
                   <td>{sub.subscriptionDetails}</td>
-                  <td className="action">
-                    <button
-                      onClick={() => {
-                        setView(true);
-                        setSubscription(sub);
-                        setIsDialogOpen(true);
-                      }}
-                    >
-                      <View />
-                    </button>
-                    <button
-                      onClick={() => {
-                        setView(false);
-                        setSubscription(sub);
-                        setIsDialogOpen(true);
-                      }}
-                    >
-                      <Edit />
-                    </button>
-                    <button onClick={() => handleDeleteDialog(sub)}>
-                      <Delete />
-                    </button>
+                  <td>
+                    <div className="action">
+                      <button
+                        onClick={() => {
+                          setView(true);
+                          setSubscription(sub);
+                          setIsDialogOpen(true);
+                        }}
+                      >
+                        <View />
+                      </button>
+                      <button
+                        onClick={() => {
+                          setView(false);
+                          setSubscription(sub);
+                          setIsDialogOpen(true);
+                        }}
+                      >
+                        <Edit />
+                      </button>
+                      <button onClick={() => handleDeleteDialog(sub)}>
+                        <Delete />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

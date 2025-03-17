@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./add-member-form.css";
+import { fetchSubscriptions, saveUser, updateUser } from "../../helper/apis";
+import Success from "../icons/success";
+import LoadingAction from "../loader/loading-action";
 const defaultUsers = {
   name: "",
   phoneNo: "",
@@ -9,51 +12,29 @@ const defaultUsers = {
   amount: "",
 };
 
-const typesOfSubscriptions = [
-  {
-    subscriptionId: 0,
-    subscriptionDiscount: 0,
-    subscriptionPrice: 0,
-    subscriptionPlan: "Select Subscription Plan",
-    subscriptionOffer: "",
-    subscriptionDetails: "",
-  },
-  {
-    subscriptionId: 100,
-    subscriptionDiscount: 5,
-    subscriptionPrice: 1999,
-    subscriptionPlan: "1-Month Plan for just ₹1,999!",
-    subscriptionOffer: "Get a 5% discount on your Subscription Plan!",
-    subscriptionDetails: "Enjoy a 21-day pause on your subscription",
-  },
-  {
-    subscriptionId: 200,
-    subscriptionDiscount: 0,
-    subscriptionPrice: 2999,
-    subscriptionPlan: "2-Month Plan for just ₹2,999!",
-    subscriptionOffer: "No discount on your Subscription Plan!",
-    subscriptionDetails: "Enjoy a 21-day pause on your subscription",
-  },
-  {
-    subscriptionId: 300,
-    subscriptionDiscount: 10,
-    subscriptionPrice: 4999,
-    subscriptionPlan: "3-Month Plan for just ₹4,999!",
-    subscriptionOffer: "Get a 10% discount on your Subscription Plan!",
-    subscriptionDetails: "Enjoy a 21-day pause on your subscription",
-  },
-  {
-    subscriptionId: 400,
-    subscriptionDiscount: 15,
-    subscriptionPrice: 7999,
-    subscriptionPlan: "6-Month Plan for just ₹7,999!",
-    subscriptionOffer: "Get a 15% discount on your Subscription Plan!",
-    subscriptionDetails: "Enjoy a 21-day pause on your subscription",
-  },
-];
+const zeroSubscriptions0 = {
+  subscriptionId: 0,
+  subscriptionDiscount: 0,
+  subscriptionPrice: 0,
+  subscriptionPlan: "Select Subscription Plan",
+  subscriptionOffer: "",
+  subscriptionDetails: "",
+};
 
-const AddMemberForm = ({ user }) => {
+const AddMemberForm = ({ user, onSubmit }) => {
   const [formData, setFormData] = useState(user || defaultUsers);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [typesOfSubscriptions, setTypesOfSubscriptions] = useState([]);
+
+  useEffect(() => {
+    const getSubscriptions = async () => {
+      const subscriptions = await fetchSubscriptions();
+      setTypesOfSubscriptions([zeroSubscriptions0, ...subscriptions]);
+    };
+    getSubscriptions();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,116 +56,174 @@ const AddMemberForm = ({ user }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    console.log(formData);
+    if (user) {
+      const updatedSub = await updateUser(formData.phoneNo, formData);
+      if (!updatedSub) {
+        setError("Error updating subscription");
+        setLoading(false);
+        return;
+      }
+      setSuccess(true);
+      setLoading(false);
+      setFormData(defaultUsers);
+      onSubmit();
+      return;
+    }
+
+    const savedSub = await saveUser(formData);
+    if (!savedSub) {
+      setError("Error adding subscription");
+      setLoading(false);
+      return;
+    }
+    setSuccess(true);
+    setLoading(false);
+    setFormData(defaultUsers);
+    onSubmit();
   };
 
   return (
     <div>
-      <form className="add-user-form" onSubmit={handleFormSubmit}>
-        <h3>{user ? "Update Member Details" : "Add New Member"}</h3>
+      {loading && (
+        <LoadingAction
+          text={user ? "Updating Member..." : "Adding Member..."}
+        />
+      )}
 
-        <div className="input-group">
-          <label htmlFor="name">Name</label>
-          <input
-            required
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-
-          <label htmlFor="phoneNo">Phone No</label>
-          <input
-            required
-            type="text"
-            name="phoneNo"
-            placeholder="Phone No"
-            value={formData.phoneNo}
-            onChange={handleChange}
-          />
-
-          <label htmlFor="emailId">Email ID</label>
-          <input
-            required
-            type="email"
-            name="emailId"
-            placeholder="Email ID"
-            value={formData.emailId}
-            onChange={handleChange}
-          />
-
-          <label htmlFor="joiningDate">Joining Date</label>
-          <input
-            required
-            type="date"
-            name="joiningDate"
-            placeholder="Joining Date"
-            value={formData.joiningDate.split("T")[0]}
-            onChange={handleChange}
-          />
-
-          <label htmlFor="subscriptionId">Subscription Plan</label>
-          <select
-            required
-            name="subscriptionId"
-            value={formData.subscriptionId}
-            onChange={handleChange}
-          >
-            {typesOfSubscriptions.map((sub) => (
-              <option key={sub.subscriptionId} value={sub.subscriptionId}>
-                {`${sub.subscriptionPlan}${
-                  sub.subscriptionDiscount !== 0
-                    ? ` - ₹${sub.subscriptionDiscount} % discount`
-                    : ""
-                }`}
-              </option>
-            ))}
-          </select>
+      {success && (
+        <div className="add-user-form success-message">
+          <Success size={100} />
+          <h3>
+            {user ? "Member Updated Successfully" : "Member Added Successfully"}
+          </h3>
         </div>
+      )}
 
-        {formData.amount > 0 ? (
-          <table className="amount-details">
-            <tbody>
-              <tr>
-                <td>Amount</td>
-                <td>₹{formData.amount}</td>
-              </tr>
-              <tr>
-                <td>Discount</td>
-                <td>
-                  {
-                    typesOfSubscriptions.find(
-                      (sub) =>
-                        sub.subscriptionId === parseInt(formData.subscriptionId)
-                    ).subscriptionDiscount
-                  }
-                  %
-                </td>
-              </tr>
-              <tr>
-                <td>GST 18%</td>
-                <td>₹{(formData.amount * 0.18).toFixed(2)}</td>
-              </tr>
-              <tr>
-                <td>Total Amount</td>
-                <td>
-                  ₹{(formData.amount + formData.amount * 0.18).toFixed(2)}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        ) : (
-          <p className="no-amount">
-            Please select a Subscription Plan to view the final amount details.
-          </p>
-        )}
+      {!success && (
+        <form className="add-user-form" onSubmit={handleFormSubmit}>
+          <h3>{user ? "Update Member Details" : "Add New Member"}</h3>
 
-        <button type="submit">{user ? "Update Member" : "Add Member"}</button>
-      </form>
+          <div className="input-group">
+            <label htmlFor="phoneNo">Phone No</label>
+            <input
+              required
+              type="text"
+              name="phoneNo"
+              placeholder="Phone No"
+              value={formData.phoneNo}
+              onChange={handleChange}
+              disabled={user}
+            />
+
+            <label htmlFor="name">Name</label>
+            <input
+              required
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+
+            <label htmlFor="emailId">Email ID</label>
+            <input
+              required
+              type="email"
+              name="emailId"
+              placeholder="Email ID"
+              value={formData.emailId}
+              onChange={handleChange}
+            />
+
+            <label htmlFor="joiningDate">Joining Date</label>
+            <input
+              required
+              type="date"
+              name="joiningDate"
+              placeholder="Joining Date"
+              value={formData.joiningDate.split("T")[0]}
+              onChange={handleChange}
+            />
+
+            <label htmlFor="subscriptionId">Subscription Plan</label>
+            <select
+              required
+              name="subscriptionId"
+              value={formData.subscriptionId}
+              onChange={handleChange}
+            >
+              {typesOfSubscriptions.map((sub) => (
+                <option key={sub.subscriptionId} value={sub.subscriptionId}>
+                  {`${sub.subscriptionPlan}${
+                    sub.subscriptionDiscount !== 0
+                      ? ` - ₹${sub.subscriptionDiscount} % discount`
+                      : ""
+                  }`}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {formData.amount > 0 ? (
+            <table className="amount-details">
+              <tbody>
+                <tr>
+                  <td>Amount</td>
+                  <td>
+                    ₹
+                    {
+                      typesOfSubscriptions.find(
+                        (sub) =>
+                          sub.subscriptionId ===
+                          parseInt(formData.subscriptionId)
+                      )?.subscriptionPrice
+                    }
+                  </td>
+                </tr>
+                <tr>
+                  <td>Discount</td>
+                  <td>
+                    {
+                      typesOfSubscriptions.find(
+                        (sub) =>
+                          sub.subscriptionId ===
+                          parseInt(formData.subscriptionId)
+                      )?.subscriptionDiscount
+                    }
+                    %
+                  </td>
+                </tr>
+                <tr>
+                  <td>After discount</td>
+                  <td>₹{formData.amount}</td>
+                </tr>
+                <tr>
+                  <td>GST 18%</td>
+                  <td>₹{(formData.amount * 0.18).toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td>Total Amount</td>
+                  <td>
+                    ₹{(formData.amount + formData.amount * 0.18).toFixed(2)}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            <p className="no-amount">
+              Please select a Subscription Plan to view the final amount
+              details.
+            </p>
+          )}
+
+          {error && <div className="error-message">{error}</div>}
+          <button type="submit">{user ? "Update Member" : "Add Member"}</button>
+        </form>
+      )}
     </div>
   );
 };
