@@ -25,6 +25,10 @@
   gap: 10px;
 }
 
+.action button {
+  background: #242424;
+}
+
 button {
   background: #ff5722;
   color: white;

@@ -7,7 +7,8 @@ import AddMemberForm from "../../components/add-member-form/add-member-form";
 import { deleteUser, fetchUsers } from "../../helper/apis";
 import "./members.css";
 import Loader from "../../components/loader/loader";
-import { maskEmailId, maskPhoneNo } from "../../helper/utils";
+import { maskPhoneNo } from "../../helper/utils";
+import ViewMember from "./view-member";
 
 const Members = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -61,10 +62,8 @@ const Members = () => {
               <tr>
                 <th>Name</th>
                 <th>Phone No</th>
-                {/* <th>Email ID</th> */}
                 <th>ID</th>
                 <th>Joining Date</th>
-                {/* <th>Amount</th> */}
                 <th>Action</th>
               </tr>
             </thead>
@@ -73,10 +72,8 @@ const Members = () => {
                 <tr key={index}>
                   <td>{user.name}</td>
                   <td>{maskPhoneNo(user.phoneNo)}</td>
-                  {/* <td>{maskEmailId(user.emailId)}</td> */}
                   <td>{user.subscriptionId}</td>
                   <td>{new Date(user.joiningDate).toLocaleDateString()}</td>
-                  {/* <td>₹{user.amount}</td> */}
                   <td>
                     <div className="action">
                       <button
@@ -162,39 +159,3 @@ const Members = () => {
 };
 
 export default Members;
-
-const ViewMember = ({ member }) => {
-  return (
-    <div className="user-card">
-      <h3 className="title">Member Details</h3>
-      <table className="user-details-table">
-        <tbody>
-          <tr>
-            <td>Name - </td>
-            <td>{member?.name}</td>
-          </tr>
-          <tr>
-            <td>Phone No - </td>
-            <td>{maskPhoneNo(member?.phoneNo)}</td>
-          </tr>
-          <tr>
-            <td>Email - </td>
-            <td>{maskEmailId(member?.emailId)}</td>
-          </tr>
-          <tr>
-            <td>Joining Date - </td>
-            <td>{new Date(member?.joiningDate).toLocaleString()}</td>
-          </tr>
-          <tr>
-            <td>Subscription ID - </td>
-            <td>{member?.subscriptionId}</td>
-          </tr>
-          <tr>
-            <td>Amount - </td>
-            <td>₹{member?.amount}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-};

@@ -7,6 +7,7 @@ import AddSubscriptionForm from "../../components/add-subscription-form/add-subs
 import "./subscriptions.css";
 import { deleteSubscription, fetchSubscriptions } from "../../helper/apis";
 import Close from "../../components/icons/close";
+import ViewSubscription from "./view-subscription";
 
 const Subscriptions = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -57,8 +58,8 @@ const Subscriptions = () => {
               <tr>
                 <th>Subscription ID</th>
                 <th>Plan</th>
-                <th>Offer</th>
-                <th>Details</th>
+                <th>Price</th>
+                <th>Discount</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -67,8 +68,8 @@ const Subscriptions = () => {
                 <tr key={sub.subscriptionId}>
                   <td>{sub.subscriptionId}</td>
                   <td>{sub.subscriptionPlan}</td>
-                  <td>{sub.subscriptionOffer}</td>
-                  <td>{sub.subscriptionDetails}</td>
+                  <td>{sub.subscriptionPrice}</td>
+                  <td>{sub.subscriptionDiscount}</td>
                   <td>
                     <div className="action">
                       <button
@@ -157,39 +158,3 @@ const Subscriptions = () => {
 };
 
 export default Subscriptions;
-
-const ViewSubscription = ({ subscription }) => {
-  return (
-    <div className="subscription-card">
-      <h3 className="title">Subscription Details</h3>
-      <table className="subscription-details-table">
-        <tbody>
-          <tr>
-            <td>ID - </td>
-            <td>{subscription.subscriptionId}</td>
-          </tr>
-          <tr>
-            <td>Plan - </td>
-            <td>{subscription.subscriptionPlan}</td>
-          </tr>
-          <tr>
-            <td>Price - </td>
-            <td>{subscription.subscriptionPrice}</td>
-          </tr>
-          <tr>
-            <td>Discount - </td>
-            <td>{subscription.subscriptionDiscount}</td>
-          </tr>
-          <tr>
-            <td>Offer - </td>
-            <td>{subscription.subscriptionOffer}</td>
-          </tr>
-          <tr>
-            <td>Details - </td>
-            <td>{subscription.subscriptionDetails}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-};
