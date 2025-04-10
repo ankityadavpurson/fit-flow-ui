@@ -1,4 +1,27 @@
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #fff;
+  flex-direction: column;
+  background: url('../../assets/bg-images/fil-flow-5.jpg');
+  background-size: cover;
+}
+
+.loader {
+  filter: invert(1);
+  display: inline-block;
+  animation: bounce 2s infinite;
+}
+
+.loader-text{
+  font-size: 30px;
+  filter: invert(1);
+}
+
 @keyframes bounce {
+
   0%,
   20%,
   50%,
@@ -6,15 +29,12 @@
   100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-30px);
   }
+
   60% {
     transform: translateY(-15px);
   }
-}
-
-.loader {
-  display: inline-block;
-  animation: bounce 2s infinite;
 }

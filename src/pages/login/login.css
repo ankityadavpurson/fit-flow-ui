@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url(https://t4.ftcdn.net/jpg/03/15/66/19/360_F_315661914_4nYonzSIxGpgjy5DlJ9nxq3IE6yYfylZ.jpg);
+  background: url('../../assets/bg-images/fil-flow-6.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,7 +14,7 @@
   border-radius: 8px;
   text-align: center;
   width: 300px;
-  background-color: #000000b3;
+  background: #00000090;
 }
 
 .input-group {

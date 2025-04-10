@@ -7,6 +7,9 @@
   color: white;
   margin-bottom: 20px;
   flex-wrap: wrap;
+  z-index: 1;
+  position: absolute;
+  width: 100%;
 }
 
 .header-title {
@@ -16,7 +19,8 @@
   padding-right: 20px;
 }
 
-.header-title span, a {
+.header-title span,
+a {
   text-decoration-line: none;
   color: white;
 }

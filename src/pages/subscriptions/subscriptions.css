@@ -1,6 +1,8 @@
 .subscriptions-container {
   text-align: center;
   height: 100vh;
+  background: url('../../assets/bg-images/fil-flow-2.jpg');
+  background-size: cover;
 }
 
 .add-member {
@@ -17,6 +19,7 @@ table {
   border-collapse: collapse;
   margin: auto;
   margin-top: 20px;
+  background: #00000090;
 }
 
 th,
@@ -49,7 +52,7 @@ th {
   border: none;
 }
 
-.subscription-details-table tr > td:first-child {
+.subscription-details-table tr>td:first-child {
   font-weight: bold;
 }
 

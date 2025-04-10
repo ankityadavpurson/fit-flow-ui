@@ -3,18 +3,9 @@ import "./loader.css";
 
 const Loader = () => {
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        color: "#fff",
-        flexDirection: "column",
-      }}
-    >
+    <div className="loader-container">
       <LoadingDumbbell />
-      <div>Loading ...</div>
+      <div className="loader-text">Loading ...</div>
     </div>
   );
 };

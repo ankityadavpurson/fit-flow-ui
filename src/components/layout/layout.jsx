@@ -12,6 +12,7 @@ const Layout = (props) => {
   return (
     <>
       <Header />
+      <div style={{ height: 120 }}></div>
       {props.children}
     </>
   );

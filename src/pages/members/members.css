@@ -1,6 +1,8 @@
 .members-container {
   text-align: center;
   height: 100vh;
+  background: url('../../assets/bg-images/fil-flow-3.jpg');
+  background-size: cover;
 }
 
 table {
@@ -14,6 +16,7 @@ td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
+  background: #00000090;
 }
 
 th {

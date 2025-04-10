@@ -1,6 +1,8 @@
 .home-container {
   text-align: center;
   height: 100vh;
+  background: url('../../assets/bg-images/fil-flow-4.jpeg');
+  background-size: cover;
 }
 
 .kpi-container {
@@ -15,11 +17,12 @@
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #b6b6b657;
-  box-shadow: 0 0px 8px rgba(128, 128, 128, 0.2);
+  box-shadow: 0 0px 8px #80808033;
   width: 200px;
   text-align: center;
   text-decoration: none;
   color: white;
+  background: #00000090;
 }
 
 .kpi-card:hover {
